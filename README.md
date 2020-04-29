@@ -31,10 +31,13 @@ If you want to check what's inside `portainer` it's available on port `9000`.
 6. Schedule killing all services after configured amount of seconds. If there are another request services will be killed amount of seconds after last request.
 7. If time is up, there are sended `docker stop` to all containers within `docker-compose.yml`.
 
-## Development
+## Developer guide
 
 By default there is an example of configuration for simple `hello-world` docker instance.
-Docker configuration is in file `config/app/hello-world/docker-compose.yml`.
+
+After startup example `hello-world` is available at [http://localhost:80/hello-world](http://localhost:80/hello-world). It can take a while because docker image have to be downloaded, extracted and launched. However next request should take less time.
+
+Docker configuration is placed in file `config/app/hello-world/docker-compose.yml`.
 
 `L4v` is based on `OpenResty` project, which is a kind of wrapper for `nginx`. So configuration of endpoints are given in file `config/nginx/conf.d/default.conf`.
 
