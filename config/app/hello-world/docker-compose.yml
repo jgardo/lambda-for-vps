@@ -1,0 +1,6 @@
+version: "2.2"
+services:
+  hello-world:
+    image: strm/helloworld-http
+    ports:
+      - 8080:80

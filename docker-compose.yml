@@ -1,0 +1,29 @@
+version: "2.3"
+networks:
+  isolation-network:
+    driver: bridge
+services:
+  openresty:
+    image: openresty/openresty:alpine
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./config/nginx/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./docker-manager:/docker-manager
+      - ./config/app/hello-world:/hello-world
+    ports:
+      - 80:80
+    depends_on:
+      - portainer    
+    networks:
+      - isolation-network
+    environment:
+      - portainerLogin=admin
+      - portainerPassword=adminpassword
+  portainer:
+    image: portainer/portainer
+    ports:
+      - 9000:9000 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - isolation-network
