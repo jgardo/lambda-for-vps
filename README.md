@@ -5,7 +5,7 @@ Simple service forwarding request to docker containers. If there is a request to
 This service requires `docker` and `docker-compose`.
 It uses local docker instance and it's local `/var/run/docker.sock` to administrate containers.
 
-It depends on [`portainer`](https://www.portainer.io/) and [`openresty` (`resty`)](https://openresty.org/en/)
+It depends on [`portainer`](https://www.portainer.io/) and [`openresty` (`nginx`)](https://openresty.org/en/)
 
 ## User guide
 

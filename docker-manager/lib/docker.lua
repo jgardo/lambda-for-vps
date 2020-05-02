@@ -43,7 +43,7 @@ function retrieveLocalEndpointId()
     end
 end
 
-local function findStackWithName(endpointId, name)
+function findStackWithName(endpointId, name)
     local stacksStatus, stacks = http.get('/portainer/api/stacks')
     for i,stack in ipairs(stacks) do 
         if stack["Name"] == name then
@@ -62,7 +62,7 @@ function findNetworkForStackWithName(endpointId, name)
     end
 end
 
-local function deletePreviousStackWithName(endpointId, name)
+function deletePreviousStackWithName(endpointId, name)
     local stackId = findStackWithName(endpointId, name)
     if stackId ~= nil then
         local deleteStatus, result = http.delete('/portainer/api/stacks/' .. stackId);
@@ -100,7 +100,7 @@ function stopStackWithName(endpointId, name)
     end
 end
 
-local function deployStack(endpointId, stackName, dockerComposeFilePath)
+function deployStack(endpointId, stackName, dockerComposeFilePath)
     deletePreviousStackWithName(endpointId, stackName)
     local f = io.open(dockerComposeFilePath, "r")
     local content = f:read("*a")

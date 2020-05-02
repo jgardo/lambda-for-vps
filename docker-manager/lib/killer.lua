@@ -1,7 +1,7 @@
 module("killer", package.seeall)
 local externalDocker = require("externaldocker")
 
-local function retrieveLocalEndpointId(jwt) 
+function retrieveLocalEndpointId(jwt) 
     local state = ngx.shared.state;
     local localEndpointId = state:get("localEndpointId");
     
@@ -14,7 +14,7 @@ function scheduleKilling(initParams)
     local stackName = initParams.stackName;
 end
 
-local function killAllThatShouldBeKilled(premature) 
+function killAllThatShouldBeKilled(premature) 
     local username = os.getenv('portainerLogin');
     local password = os.getenv('portainerPassword');
 

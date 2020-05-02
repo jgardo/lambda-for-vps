@@ -1,11 +1,11 @@
 module("initializer", package.seeall)
 local docker = require('docker')
 
-local function log(string)
+function log(string)
     ngx.log(ngx.ERR, string);
 end
 
-local function initializeAdmin(username, password)
+function initializeAdmin(username, password)
     local state = ngx.shared.state;
     local adminInitialized = state:get("adminInitialized");
     
@@ -15,13 +15,13 @@ local function initializeAdmin(username, password)
     end
 end
 
-local function authorizeDocker(username, password)
+function authorizeDocker(username, password)
     local jwt = docker.initializeJwt(username, password)
     docker.setAuthorizationHeader(jwt)
     return jwt
 end
 
-local function retrieveLocalEndpointId() 
+function retrieveLocalEndpointId() 
     local state = ngx.shared.state;
     local localEndpointId = state:get("localEndpointId");
     
@@ -32,14 +32,14 @@ local function retrieveLocalEndpointId()
     return localEndpointId
 end
 
-local function restartStackWithName(localEndpointId, stackName, dockerComposeFilePath, afterRestartSleep)
+function restartStackWithName(localEndpointId, stackName, dockerComposeFilePath, afterRestartSleep)
     local atLeastOneRestarted = docker.restartStackWithName(localEndpointId, stackName, dockerComposeFilePath)
     if atLeastOneRestarted == true then
         ngx.sleep(afterRestartSleep)
     end
 end
 
-local function updateIp(localEndpointId, stackName)
+function updateIp(localEndpointId, stackName)
     local ips = ngx.shared.ips;
     local networkIp = ips:get(stackName)
     if networkIp == nil then 
